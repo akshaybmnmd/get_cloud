@@ -1,0 +1,29 @@
+.container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+img {
+  max-width: 200px;
+}
+
+.photo {
+  margin: 3px;
+  border: 1px solid #ccc;
+  padding: 15px;
+  font-size: 14px;
+}
+
+a {
+  color: #4183c4;
+  text-decoration: none;
+  outline: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+a:active {
+  outline: none;
+}

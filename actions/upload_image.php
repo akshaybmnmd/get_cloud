@@ -9,6 +9,8 @@ $user_id = $_SESSION['user_id'];
 $ip = $_SERVER['REMOTE_ADDR'];
 $time = time();
 
+$_SESSION['message'] = "unknown error occured!";
+
 if (isset($_POST['submitted'])) {
     if (isset($_FILES['upload'])) {
         $allowed = array('image/pjpeg', 'image/jpeg', 'image/JPG', 'image/X-PNG', 'image/PNG', 'image/png', 'image/x-png');

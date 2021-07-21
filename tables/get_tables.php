@@ -33,8 +33,8 @@ $primaryKey = 'id';
 
 // SQL server connection information
 $sql_details = array(
-    'user' => 'root',
-    'pass' => "",
+    'user' => 'php_user',
+    'pass' => 'Z<8$c.hNgR(]<xnn',
     'db'   => 'images',
     'host' => "localhost"
 );

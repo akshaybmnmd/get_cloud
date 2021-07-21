@@ -15,7 +15,7 @@ if ($result->num_rows > 0) {
     $users = [];
 }
 
-$sql = "SELECT * FROM `images` WHERE `privacy` = 'public' ORDER BY `time` DESC";
+$sql = "SELECT * FROM `images` WHERE `privacy` = 'public' AND `location` = 'local_hdd_U_i' ORDER BY `time` DESC";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {

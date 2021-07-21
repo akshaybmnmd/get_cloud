@@ -3,7 +3,7 @@ session_start();
 require "../common/db.php";
 
 $user_id = $_SESSION['user_id'];
-$sql = "SELECT * FROM `images` WHERE `user_id` = '$user_id' ORDER BY `time` DESC";
+$sql = "SELECT * FROM `images` WHERE `user_id` = '$user_id' AND `location` = 'local_hdd_U_i' ORDER BY `time` DESC";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
   // output data of each row

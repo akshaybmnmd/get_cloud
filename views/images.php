@@ -119,12 +119,9 @@ $conn->close();
     });
   }
 
-  $('.container').on('scroll', function() {
-    if ($(this).scrollTop() +
-      $(this).innerHeight() >=
-      $(this)[0].scrollHeight) {
-
-      alert('End of DIV is reached!');
+  $(window).scroll(function() {
+    if ($(window).scrollTop() + $(window).height() + 200 > $(document).height()) {
+      alert("bottom!");
     }
   });
 </script>

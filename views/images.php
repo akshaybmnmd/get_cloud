@@ -144,6 +144,16 @@ $conn->close();
         });
         page_flag++;
       }
+
+      $('img').click((t) => {
+        id = t.target.id;
+        size = images[id].mem + " KB ";
+        status = images[id].privacy;
+        modal.style.display = "block";
+        modalImg.src = t.target.src;
+        likes = status == "public" ? "<br>" + images[id].like + " Likes" : "";
+        captionText.innerHTML = t.target.alt + '<br>size  ' + size + status + likes + '<br>Download &nbsp; <i class="fas fa-download"></i>';
+      });
     }
     $('.container').append("");
     console.log("oops");

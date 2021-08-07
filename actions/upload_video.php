@@ -18,8 +18,8 @@ if (isset($_POST['submitted'])) {
         if (in_array($_FILES['upload']['type'], $allowed)) {
             $filename = preg_replace('/[^a-zA-Z0-9_. ]/', '', $_FILES['upload']['name']);
 
-            if (strlen($filename) > 45) {
-                $x = strlen($filename) - 45;
+            if (strlen($filename) > 250) {
+                $x = strlen($filename) - 250;
                 $filename = substr($filename, $x);
             }
 

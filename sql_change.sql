@@ -1,4 +1,1 @@
-ALTER TABLE `images` ADD `likes` INT(20) NULL AFTER `privacy`, ADD INDEX `likes` (`likes`);
-
-ALTER TABLE `videos` ADD `likes` INT(20) NULL AFTER `privacy`, ADD INDEX `likes` (`likes`);
-
+ALTER TABLE `images` CHANGE `Name` `Name` VARCHAR(300) NOT NULL;

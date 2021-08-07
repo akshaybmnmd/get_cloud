@@ -62,8 +62,9 @@ $conn->close();
     $output .= "({$img['mem']} KB) <button id='{$img['id']}' onclick='change_privacy({$img['id']})'>Make " . ($img['privacy'] == 'public' ? "private" : "public") . "</button><br>";
     $output .= "{$img['like']} likes<br>\n";
     $output .= "</div>\n";
-    // if ($key == 49)
-    //   break;
+    $ratio = $key;
+    if ($key == 79)
+      break;
   }
 
   if (!empty($output)) {
@@ -75,6 +76,19 @@ $conn->close();
 
 <script type="text/javascript" charset="utf-8">
   var images = <?php echo json_encode($images); ?>;
+  page = -1;
+  page_flag = -1;
+  pages = [];
+  id = <?php echo $ratio; ?>;
+
+  var i, j, temporary, chunk = 20;
+  for (i = 0, j = images.length; i < j; i += chunk) {
+    temporary = images.slice(i, i + chunk);
+    if (i >= 80) {
+      console.log(temporary, i);
+      pages.push(temporary);
+    }
+  }
 
   var modal = document.getElementById("myModal");
 
@@ -120,6 +134,15 @@ $conn->close();
   }
 
   function loadrest() {
+    if (page == page_flag) {
+      page++;
+      pages[page].forEach((val) => {
+        console.log(val);
+        id++;
+        $('.container').append('<div class="photo"><img class="lazy" id="' + id + '" src="' + val.path + '" data-original="' + val.path + '" alt="' + val.name + '"><br>(5303 KB) <button id="' + val.id + '" onclick="change_privacy(' + val.id + ')">Make ' + val.privacy + '</button><br>' + val.like + ' likes<br></div>');
+      });
+    }
+    $('.container').append("");
     console.log("oops");
   }
 

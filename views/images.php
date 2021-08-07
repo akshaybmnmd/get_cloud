@@ -175,22 +175,27 @@ $conn->close();
       })
       .done((data) => {
         console.log("Data Saved", data);
-        var i, j, temporary, chunk = 20;
         img = data.data;
 
-        img.forEach((val) => {
-          images.push(val);
-        })
+        if (img) {
+          img.forEach((val) => {
+            images.push(val);
+          });
 
-        for (i = 0, j = img.length; i < j; i += chunk) {
-          temporary = img.slice(i, i + chunk);
+          var i, j, temporary, chunk = 20;
+          for (i = 0, j = img.length; i < j; i += chunk) {
+            temporary = img.slice(i, i + chunk);
 
-          if (i >= 50) {
-            pages.push(temporary);
+            if (i >= 50) {
+              pages.push(temporary);
+            }
           }
-        }
 
-        request++;
+          request++;
+          page_flag++;
+        } else {
+          request = 0;
+        }
       });
   }
 

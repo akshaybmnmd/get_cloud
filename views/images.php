@@ -62,8 +62,8 @@ $conn->close();
     $output .= "({$img['mem']} KB) <button id='{$img['id']}' onclick='change_privacy({$img['id']})'>Make " . ($img['privacy'] == 'public' ? "private" : "public") . "</button><br>";
     $output .= "{$img['like']} likes<br>\n";
     $output .= "</div>\n";
-    if ($key == 49)
-      break;
+    // if ($key == 49)
+    //   break;
   }
 
   if (!empty($output)) {

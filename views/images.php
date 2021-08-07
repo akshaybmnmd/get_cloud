@@ -177,7 +177,7 @@ $conn->close();
         console.log("Data Saved", data);
         img = data.data;
 
-        if (img) {
+        if (img.length) {
           img.forEach((val) => {
             images.push(val);
           });

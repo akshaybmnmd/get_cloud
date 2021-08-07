@@ -85,7 +85,6 @@ $conn->close();
   for (i = 0, j = images.length; i < j; i += chunk) {
     temporary = images.slice(i, i + chunk);
     if (i >= 80) {
-      console.log(temporary, i);
       pages.push(temporary);
     }
   }
@@ -124,7 +123,6 @@ $conn->close();
       user_id: user_id,
       action: 'change_image'
     }, function(result) {
-      console.log(result);
       if (result.query_1 === true) {
         var innerText = $("#" + id)[0].innerText;
         if (innerText == 'Make public') $("#" + id)[0].innerText = "Make private";
@@ -138,7 +136,6 @@ $conn->close();
       page++;
       if (pages[page]) {
         pages[page].forEach((val) => {
-          console.log(val);
           id++;
           $('.container').append('<div class="photo"><img class="lazy" id="' + id + '" src="' + val.path + '" data-original="' + val.path + '" alt="' + val.name + '"><br>(5303 KB) <button id="' + val.id + '" onclick="change_privacy(' + val.id + ')">Make ' + val.privacy + '</button><br>' + val.like + ' likes<br></div>');
         });
@@ -156,7 +153,6 @@ $conn->close();
       });
     }
     $('.container').append("");
-    console.log("oops");
   }
 
   $(window).scroll(function() {

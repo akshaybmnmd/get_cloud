@@ -3,7 +3,7 @@ session_start();
 require "../common/db.php";
 
 $user_id = $_SESSION['user_id'];
-$sql = "SELECT * FROM `images` WHERE `user_id` = '$user_id' AND `location` = 'local_hdd_U_i' ORDER BY `time` DESC";
+$sql = "SELECT * FROM `images` WHERE `user_id` = '$user_id' AND `location` = 'local_hdd_U_i' ORDER BY `time` DESC LIMIT 500";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
   // output data of each row
@@ -63,7 +63,7 @@ $conn->close();
     $output .= "{$img['like']} likes<br>\n";
     $output .= "</div>\n";
     $ratio = $key;
-    if ($key == 79)
+    if ($key == 49)
       break;
   }
 
@@ -78,13 +78,14 @@ $conn->close();
   var images = <?php echo json_encode($images); ?>;
   page = -1;
   page_flag = -1;
+  request = 1;
   pages = [];
   id = <?php echo $ratio; ?>;
 
   var i, j, temporary, chunk = 20;
   for (i = 0, j = images.length; i < j; i += chunk) {
     temporary = images.slice(i, i + chunk);
-    if (i >= 80) {
+    if (i >= 50) {
       pages.push(temporary);
     }
   }
@@ -137,22 +138,40 @@ $conn->close();
       if (pages[page]) {
         pages[page].forEach((val) => {
           id++;
-          $('.container').append('<div class="photo"><img class="lazy" id="' + id + '" src="' + val.path + '" data-original="' + val.path + '" alt="' + val.name + '"><br>(5303 KB) <button id="' + val.id + '" onclick="change_privacy(' + val.id + ')">Make ' + val.privacy + '</button><br>' + val.like + ' likes<br></div>');
+          $('.container').append('<div class="photo"><img class="lazy" id="' + id + '" src="' + val.path + '" data-original="' + val.path + '" alt="' + val.name + '"><br>(' + val.size + ' KB) <button id="' + val.id + '" onclick="change_privacy(' + val.id + ')">Make ' + val.privacy + '</button><br>' + val.like + ' likes<br></div>');
         });
+
+        $('img').click((t) => {
+          id = t.target.id;
+          size = images[id].mem + " KB ";
+          status = images[id].privacy;
+          modal.style.display = "block";
+          modalImg.src = t.target.src;
+          likes = status == "public" ? "<br>" + images[id].like + " Likes" : "";
+          captionText.innerHTML = t.target.alt + '<br>size  ' + size + status + likes + '<br>Download &nbsp; <i class="fas fa-download"></i>';
+        });
+
         page_flag++;
       }
 
-      $('img').click((t) => {
-        id = t.target.id;
-        size = images[id].mem + " KB ";
-        status = images[id].privacy;
-        modal.style.display = "block";
-        modalImg.src = t.target.src;
-        likes = status == "public" ? "<br>" + images[id].like + " Likes" : "";
-        captionText.innerHTML = t.target.alt + '<br>size  ' + size + status + likes + '<br>Download &nbsp; <i class="fas fa-download"></i>';
-      });
+      loadnextpage();
+
     }
     $('.container').append("");
+  }
+
+  function loadnextpage() {
+    $.ajax({
+        method: "POST",
+        url: "actions/get_images.php",
+        data: {
+          page: request,
+          location: "Boston"
+        }
+      })
+      .done((msg, data) => {
+        console.log("Data Saved", msg, data);
+      });
   }
 
   $(window).scroll(function() {

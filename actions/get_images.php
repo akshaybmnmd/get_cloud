@@ -12,9 +12,11 @@ if (@$_POST['token'] == "sdlhg3567$#^fhgE%yuY?34") {
     $user_id = $_POST['user_id'];
 }
 
+$page = $_POST['page'];
+$limit = ($page * 500) + 1;
 $response['user_id'] = $user_id;
 
-$sql = "SELECT * FROM `images` WHERE `user_id` = '$user_id' AND `location` = 'local_hdd_U_i' ORDER BY `time` DESC LIMIT 0,10";
+$sql = "SELECT * FROM `images` WHERE `user_id` = '$user_id' AND `location` = 'local_hdd_U_i' ORDER BY `time` DESC LIMIT $limit,500";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {

@@ -139,11 +139,11 @@ $conn->close();
                     </li>
 
                     <?php if (isset($_SESSION['role'])) if ($_SESSION['role'] == 'admin') { ?>
-                        <li class="file-approve">
+                        <!-- <li class="file-approve">
                             <a href="#">
                                 <i class="fas fa-edit"></i>
                             </a>
-                        </li>
+                        </li> -->
                     <?php } ?>
 
                 </ul>

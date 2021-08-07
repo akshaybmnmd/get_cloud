@@ -23,11 +23,12 @@ if (isset($_POST['submitted'])) {
                 $filename = substr($filename, $x);
             }
 
-            if (move_uploaded_file($_FILES['upload']['tmp_name'], "../uploades/images/{$filename}")) {
+            if (move_uploaded_file($_FILES['upload']['tmp_name'], "../images/{$filename}")) {
                 $_SESSION['status'] = true;
                 $_SESSION['message'] = "The files has been uploaded!";
-                $size = filesize("../uploades/images/{$filename}");
-                $sql = "INSERT INTO `scheduled` (`user_id`, `path`, `name`, `size`, `dimension`, `time`, `ip`, `privacy`, `type`) VALUES ('$user_id', 'uploades/images/$filename', '$filename', '$size', 'x', '$time', '$ip', 'private', 'image')";
+                $size = filesize("../images/{$filename}");
+                // $sql = "INSERT INTO `scheduled` (`user_id`, `path`, `name`, `size`, `dimension`, `time`, `ip`, `privacy`, `type`) VALUES ('$user_id', 'uploades/images/$filename', '$filename', '$size', 'x', '$time', '$ip', 'private', 'image')";
+                $sql = "INSERT INTO `images` (`user_id`, `approver_id`, `approver_on`, `time`, `size`, `Name`, `path`, `dimension`, `ip`, `category`, `location`, `priority`, `privacy`, `likes`) VALUES ('$user_id', '0', '0', '$time', '$size', '$filename', 'images/$filename', 'x', '$ip', 'image', 'local', '1', 'private', '0')";
                 $result = $conn->query($sql);
                 $_SESSION['sql'] = $sql;
                 $_SESSION['result'] = $result;

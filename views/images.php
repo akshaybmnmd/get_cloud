@@ -136,6 +136,7 @@ $conn->close();
   function loadrest() {
     if (page == page_flag) {
       page++;
+
       if (pages[page]) {
         pages[page].forEach((val) => {
           id++;
@@ -153,9 +154,11 @@ $conn->close();
         });
 
         page_flag++;
+      } else {
+        if (request != 0) {
+          loadnextpage();
+        }
       }
-
-      loadnextpage();
 
     }
     $('.container').append("");
@@ -170,8 +173,24 @@ $conn->close();
           location: "Boston"
         }
       })
-      .done((msg, data) => {
-        console.log("Data Saved", msg, data);
+      .done((data) => {
+        console.log("Data Saved", data);
+        var i, j, temporary, chunk = 20;
+        img = data.data;
+
+        img.forEach((val) => {
+          images.push(val);
+        })
+
+        for (i = 0, j = img.length; i < j; i += chunk) {
+          temporary = img.slice(i, i + chunk);
+
+          if (i >= 50) {
+            pages.push(temporary);
+          }
+        }
+
+        request++;
       });
   }
 

@@ -185,10 +185,7 @@ $conn->close();
           var i, j, temporary, chunk = 20;
           for (i = 0, j = img.length; i < j; i += chunk) {
             temporary = img.slice(i, i + chunk);
-
-            if (i >= 50) {
-              pages.push(temporary);
-            }
+            pages.push(temporary);
           }
 
           request++;

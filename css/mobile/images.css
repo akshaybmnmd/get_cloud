@@ -5,11 +5,11 @@
 
 img {
   max-width: 200px;
+  border-radius: 15px;
 }
 
 .photo {
   margin: 3px;
-  border: 1px solid #ccc;
   padding: 15px;
   font-size: 14px;
 }

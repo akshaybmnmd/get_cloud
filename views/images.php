@@ -62,7 +62,7 @@ $conn->close();
     $output .= "({$img['mem']} KB) <button id='{$img['id']}' onclick='change_privacy({$img['id']})'>Make " . ($img['privacy'] == 'public' ? "private" : "public") . "</button><br>";
     $output .= "{$img['like']} likes<br>\n";
     $output .= "</div>\n";
-    if ($key == 10)
+    if ($key == 49)
       break;
   }
 
@@ -118,4 +118,13 @@ $conn->close();
       }
     });
   }
+
+  $('.container').on('scroll', function() {
+    if ($(this).scrollTop() +
+      $(this).innerHeight() >=
+      $(this)[0].scrollHeight) {
+
+      alert('End of DIV is reached!');
+    }
+  });
 </script>

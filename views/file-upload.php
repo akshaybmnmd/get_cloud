@@ -47,7 +47,7 @@ session_start();
 		}
 
 		.custom-file-input::before {
-			content: '\f067 Add Images';
+			content: '+ Add Images';
 			display: inline-block;
 			background: linear-gradient(top, #f9f9f9, #e3e3e3);
 			background-color: white;
@@ -76,7 +76,7 @@ session_start();
 		}
 
 		.custom-file-input2::before {
-			content: '\f067 Add Videos';
+			content: '+ Add Videos';
 			display: inline-block;
 			background: linear-gradient(top, #f9f9f9, #e3e3e3);
 			background-color: white;

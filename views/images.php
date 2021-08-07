@@ -119,9 +119,13 @@ $conn->close();
     });
   }
 
+  function loadrest() {
+    console.log("oops");
+  }
+
   $(window).scroll(function() {
     if ($(window).scrollTop() + $(window).height() + 200 > $(document).height()) {
-      alert("bottom!");
+      loadrest();
     }
   });
 </script>

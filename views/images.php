@@ -136,12 +136,14 @@ $conn->close();
   function loadrest() {
     if (page == page_flag) {
       page++;
-      pages[page].forEach((val) => {
-        console.log(val);
-        id++;
-        $('.container').append('<div class="photo"><img class="lazy" id="' + id + '" src="' + val.path + '" data-original="' + val.path + '" alt="' + val.name + '"><br>(5303 KB) <button id="' + val.id + '" onclick="change_privacy(' + val.id + ')">Make ' + val.privacy + '</button><br>' + val.like + ' likes<br></div>');
-      });
-      page_flag++;
+      if (pages[page]) {
+        pages[page].forEach((val) => {
+          console.log(val);
+          id++;
+          $('.container').append('<div class="photo"><img class="lazy" id="' + id + '" src="' + val.path + '" data-original="' + val.path + '" alt="' + val.name + '"><br>(5303 KB) <button id="' + val.id + '" onclick="change_privacy(' + val.id + ')">Make ' + val.privacy + '</button><br>' + val.like + ' likes<br></div>');
+        });
+        page_flag++;
+      }
     }
     $('.container').append("");
     console.log("oops");

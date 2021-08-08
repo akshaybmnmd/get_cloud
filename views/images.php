@@ -64,7 +64,7 @@ $conn->close();
     $output .= "{$img['like']} likes<br>\n";
     $output .= "</div>\n";
     $ratio = $key;
-    if ($key == 49)
+    if ($key == 69)
       break;
   }
 
@@ -86,7 +86,7 @@ $conn->close();
   var i, j, temporary, chunk = 20;
   for (i = 0, j = images.length; i < j; i += chunk) {
     temporary = images.slice(i, i + chunk);
-    if (i >= 50) {
+    if (i >= 70) {
       pages.push(temporary);
     }
   }
@@ -96,16 +96,6 @@ $conn->close();
   // Get the image and insert it inside the modal - use its "alt" text as a caption
   var modalImg = document.getElementById("img01");
   var captionText = document.getElementById("caption");
-
-  $('img').click((t) => {
-    id = t.target.id;
-    size = images[id].mem + " KB ";
-    status = images[id].privacy;
-    modal.style.display = "block";
-    modalImg.src = t.target.src;
-    likes = status == "public" ? "<br>" + images[id].like + " Likes" : "";
-    captionText.innerHTML = t.target.alt + '<br>size  ' + size + status + likes + '<br>Download &nbsp; <i class="fas fa-download"></i>';
-  });
 
   // Get the <span> element that closes the modal
   var span = document.getElementsByClassName("close")[0];
@@ -118,6 +108,8 @@ $conn->close();
       $("img.lazy").lazyload();
     });
   }
+
+  add_img_click();
 
   function change_privacy(id) {
     $.post("actions/edit_privacy.php", {
@@ -143,15 +135,7 @@ $conn->close();
           $('.container').append('<div class="photo"><img class="lazy" id="' + id + '" src="' + val.path + '" data-original="' + val.path + '" alt="' + val.name + '"><br>(' + val.size + ' KB) <button id="' + val.id + '" onclick="change_privacy(' + val.id + ')">Make ' + val.privacy + '</button><br>' + val.like + ' likes<br></div>');
         });
 
-        $('img').click((t) => {
-          id = t.target.id;
-          size = images[id].mem + " KB ";
-          status = images[id].privacy;
-          modal.style.display = "block";
-          modalImg.src = t.target.src;
-          likes = status == "public" ? "<br>" + images[id].like + " Likes" : "";
-          captionText.innerHTML = t.target.alt + '<br>size  ' + size + status + likes + '<br>Download &nbsp; <i class="fas fa-download"></i>';
-        });
+        add_img_click();
 
         page_flag++;
       } else {
@@ -169,8 +153,7 @@ $conn->close();
         method: "POST",
         url: "actions/get_images.php",
         data: {
-          page: request,
-          location: "Boston"
+          page: request
         }
       })
       .done((data) => {
@@ -194,6 +177,38 @@ $conn->close();
           request = 0;
         }
       });
+  }
+
+  function add_img_click() {
+    $('img').click((t) => {
+      id = t.target.id;
+      size = images[id].mem + " KB ";
+      status = images[id].privacy;
+      modal.style.display = "block";
+      modalImg.src = t.target.src;
+      img_id = images[id].id;
+      likes = status == "public" ? "<br>" + images[id].like + " Likes" : "";
+      captionText.innerHTML = t.target.alt + '<br>size  ' + size + status + likes + '<!--<br>Download &nbsp; <i class="fas fa-download" style="cursor: pointer;" onclick="download(' + img_id + ')"></i>--><br>Move to bin &nbsp; <i class="fas fa-trash" style="cursor: pointer;" onclick="trash(' + img_id + ')"></i>';
+    });
+  }
+
+  function trash(id) {
+    console.log("trashed..", id);
+    $.ajax({
+        method: "POST",
+        url: "actions/remove_image.php",
+        data: {
+          id: id
+        }
+      })
+      .done((data) => {
+        console.log(data);
+        // location.reload();
+      });
+  }
+
+  function download(id) {
+    console.log("download..", id);
   }
 
   $(window).scroll(function() {

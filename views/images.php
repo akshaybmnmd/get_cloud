@@ -58,7 +58,7 @@ $conn->close();
   $ratio = 0.3;
   $output = "";
   foreach ($images as $key => $img) {
-    $output .= "<div class=\"photo\">";
+    $output .= "<div class=\"photo\" id=\"code$key\">";
     $output .= "<img class=\"lazy\" id=\"$key\" src=\"{$img['path']}\" data-original=\"{$img['path']}\" alt=\"{$img['name']}\"><br>\n";
     $output .= "({$img['mem']} KB) <button id='{$img['id']}' onclick='change_privacy({$img['id']})'>Make " . ($img['privacy'] == 'public' ? "private" : "public") . "</button><br>";
     $output .= "{$img['like']} likes<br>\n";
@@ -132,7 +132,7 @@ $conn->close();
       if (pages[page]) {
         pages[page].forEach((val) => {
           id++;
-          $('.container').append('<div class="photo"><img class="lazy" id="' + id + '" src="' + val.path + '" data-original="' + val.path + '" alt="' + val.name + '"><br>(' + val.size + ' KB) <button id="' + val.id + '" onclick="change_privacy(' + val.id + ')">Make ' + val.privacy + '</button><br>' + val.like + ' likes<br></div>');
+          $('.container').append('<div class="photo" id="code' + id + '"><img class="lazy" id="' + id + '" src="' + val.path + '" data-original="' + val.path + '" alt="' + val.name + '"><br>(' + val.size + ' KB) <button id="' + val.id + '" onclick="change_privacy(' + val.id + ')">Make ' + val.privacy + '</button><br>' + val.like + ' likes<br></div>');
         });
 
         add_img_click();
@@ -188,12 +188,12 @@ $conn->close();
       modalImg.src = t.target.src;
       img_id = images[id].id;
       likes = status == "public" ? "<br>" + images[id].like + " Likes" : "";
-      captionText.innerHTML = t.target.alt + '<br>size  ' + size + status + likes + '<!--<br>Download &nbsp; <i class="fas fa-download" style="cursor: pointer;" onclick="download(' + img_id + ')"></i>--><br>Move to bin &nbsp; <i class="fas fa-trash" style="cursor: pointer;" onclick="trash(' + img_id + ')"></i>';
+      captionText.innerHTML = t.target.alt + '<br>size  ' + size + status + likes + '<!--<br>Download &nbsp; <i class="fas fa-download" style="cursor: pointer;" onclick="download(' + img_id + ',' + id + ')"></i>--><br>Move to bin &nbsp; <i class="fas fa-trash" style="cursor: pointer;" onclick="trash(' + img_id + ',' + id + ')"></i>';
     });
   }
 
-  function trash(id) {
-    console.log("trashed..", id);
+  function trash(id, img_id) {
+    console.log("trashed..", id, img_id);
     $.ajax({
         method: "POST",
         url: "actions/remove_image.php",
@@ -204,11 +204,12 @@ $conn->close();
       .done((data) => {
         console.log(data);
         // location.reload();
+        $('#code' + img_id).remove();
       });
   }
 
-  function download(id) {
-    console.log("download..", id);
+  function download(id, img_id) {
+    console.log("download..", id, img_id);
   }
 
   $(window).scroll(function() {

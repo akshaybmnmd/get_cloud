@@ -180,6 +180,7 @@ $conn->close();
   }
 
   function add_img_click() {
+    console.log(images[id]);
     $('img').click((t) => {
       id = t.target.id;
       size = images[id].mem + " KB ";

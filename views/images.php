@@ -132,7 +132,7 @@ $conn->close();
       if (pages[page]) {
         pages[page].forEach((val) => {
           id++;
-          $('.container').append('<div class="photo" id="code' + id + '"><img class="lazy" id="' + id + '" src="' + val.path + '" data-original="' + val.path + '" alt="' + val.name + '"><br>(' + val.size + ' KB) <button id="' + val.id + '" onclick="change_privacy(' + val.id + ')">Make ' + val.privacy + '</button><br>' + val.like + ' likes<br></div>');
+          $('.container').append('<div class="photo" id="code' + id + '"><img class="lazy" id="' + id + '" src="' + val.path + '" data-original="' + val.path + '" alt="' + val.name + '"><br>(' + val.mem + ' KB) <button id="' + val.id + '" onclick="change_privacy(' + val.id + ')">Make ' + val.privacy + '</button><br>' + val.like + ' likes<br></div>');
         });
 
         add_img_click();
@@ -180,7 +180,6 @@ $conn->close();
   }
 
   function add_img_click() {
-    console.log(images[id]);
     $('img').click((t) => {
       id = t.target.id;
       size = images[id].mem + " KB ";

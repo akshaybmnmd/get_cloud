@@ -192,7 +192,7 @@ $conn->close();
     });
   }
 
-  function trash(id, img_id) {
+  function trash(img_id, id) {
     console.log("trashed..", id, img_id);
     $.ajax({
         method: "POST",
@@ -208,7 +208,7 @@ $conn->close();
       });
   }
 
-  function download(id, img_id) {
+  function download(img_id, id) {
     console.log("download..", id, img_id);
   }
 

@@ -57,15 +57,14 @@ $conn->close();
     </div>
 
     <?php
-    $ratio = 0.3;
-    $output = "";
+    $count = 0;
     foreach ($images as $key => $img) {
+        $count++;
         $output .= "<div class=\"photo\" style=\"text-align: center;\" id=\"code$key\">";
         $output .= "<img class=\"lazy\" id=\"$key\" src=\"{$img['path']}\" data-original=\"{$img['path']}\" alt=\"{$img['name']}\"><br>\n";
         $output .= "({$img['mem']} KB)";
         $output .= "</div>\n";
-        $ratio = $key;
-        if ($key == "k69")
+        if ($count == 70)
             break;
     }
 
@@ -82,7 +81,7 @@ $conn->close();
     page_flag = -1;
     request = 1;
     pages = [];
-    id = <?php echo $ratio; ?>;
+    id = <?php echo $count; ?>;
 
 
     var values = Object.values(bin_images);

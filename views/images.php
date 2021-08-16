@@ -210,10 +210,6 @@ $conn->close();
       });
   }
 
-  function download(img_id, id) {
-    console.log("download..", id, img_id);
-  }
-
   $(window).scroll(function() {
     if ($(window).scrollTop() + $(window).height() + 200 > $(document).height()) {
       loadrest();

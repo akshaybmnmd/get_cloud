@@ -15,5 +15,10 @@ if (!isset($_POST['action'])) {
 
 session_start();
 
+if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
+    $response['error'] = "We don't have your data.";
+    exit(json_encode($response));
+}
+
 require "../common/db.php";
 $response['DB'] = "ok";

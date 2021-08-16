@@ -25,68 +25,22 @@ switch ($_POST['action']) {
 
                         if ($conn->query($sql) === TRUE) {
                             $r = false;
-                            $response['removed'] = true;
-                            $response['status'] = "moved to bin";
+                            $response['restored'] = true;
+                            $response['status'] = "moved to images";
                         } else $response['error'] = "Error updating record: " . $conn->error . " $id\n";
                     } else $response['error'] = "can't unlink file!! $id\n";
                 } else $response['error'] = "can't get to copied file!! $id\n";
             } else $response['error'] = "can't copy file!! $id\n";
         } else $response['error'] = "file doesn't exist!! $id\n";
         break;
+    case 'from_archive':
+        $response['restored'] = true;
+        $response['status'] = "moved to images";
+        break;
     default:
         $response['error'] = "undefined action!";
         exit(json_encode($response));
 }
-
-
-
-
-
-
-
-
-
-
-
-
-// $user_id = $_SESSION['user_id'];
-
-// $id = $_POST['id'];
-
-// $sql = "SELECT * FROM `scheduled` WHERE `id` = '$id'";
-// $result = $conn->query($sql);
-// $row = $result->fetch_assoc();
-// $response['row'] = $row;
-// $u_id = $row['user_id'];
-// $path = $row['path'];
-// $filename = $row['name'];
-// $size = $row['size'];
-// $dimension = $row['dimension'];
-// $ip = $row['ip'];
-// $category = 'image';
-// $location = "local";
-// $priority = 1;
-// $privacy = $row['privacy'];
-// $time = $row['time'];
-
-// if (copy("../$path", "../images/$filename")) {
-//     $sql = "UPDATE `scheduled` SET `path` = 'images/$filename', `action` = 'approved', `action_by` = '$user_id' WHERE `scheduled`.`id` = '$id'";
-//     $result = $conn->query($sql);
-//     $response['update'] = $result;
-//     if (unlink("../$path")) {
-//         $timenow = time();
-//         $sql = "INSERT INTO `images` (`user_id`, `approver_id`, `approver_on`, `time`, `size`, `Name`, `path`, `dimension`, `ip`, `category`, `location`, `priority`, `privacy`, `likes`) VALUES ('$u_id', '$user_id', '$timenow', '$time', '$size', '$filename', 'images/$filename', '$dimension', '$ip', '$category', '$location', '$priority', '$privacy', '0')";
-//         $result = $conn->query($sql);
-//         $response['insert'] = $result;
-//     } else {
-//         $response['error'] = "file unlink failed";
-//     }
-// } else {
-//     $response['error'] = "file copy failed";
-//     $sql = "UPDATE `scheduled` SET `path` = '$path', `action` = 'failed', `action_by` = '$user_id' WHERE `scheduled`.`id` = '$id'";
-//     $result = $conn->query($sql);
-//     $response['update'] = $result;
-// }
 
 $response['error_code'] = $r;
 $conn->close();

@@ -20,7 +20,7 @@ switch ($_POST['action']) {
         $result = $conn->query($sql);
 
         if ($result->num_rows > 0) {
-            // output data of each row
+            $response['status'] = "got images";
             while ($row = $result->fetch_assoc()) {
                 $id = $row["id"];
                 $images[] = array(
@@ -33,6 +33,7 @@ switch ($_POST['action']) {
                 );
             }
         } else {
+            $response['status'] = "no images";
             $images = [];
         }
         break;
@@ -41,7 +42,7 @@ switch ($_POST['action']) {
         $result = $conn->query($sql);
 
         if ($result->num_rows > 0) {
-            // output data of each row
+            $response['status'] = "got images";
             while ($row = $result->fetch_assoc()) {
                 $id = $row["id"];
                 $images[] = array(
@@ -54,6 +55,7 @@ switch ($_POST['action']) {
                 );
             }
         } else {
+            $response['status'] = "no images";
             $images = [];
         }
         break;

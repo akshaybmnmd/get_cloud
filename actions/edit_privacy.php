@@ -1,29 +1,9 @@
 <?php
-header('Content-Type: application/json');
-
-if ($_SERVER["REQUEST_METHOD"] != "POST") {
-    $response['error'] = "only accept post requests.";
-    exit(json_encode($response));
-}
-
-session_start();
-
-if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
-    $response['error'] = "We don't have your data.";
-    exit(json_encode($response));
-}
-
-if (isset($_POST['action']))
-    $action = $_POST['action'];
-else {
-    $response['error'] = "action not specified.";
-    exit(json_encode($response));
-}
-
-require "../common/db.php";
+include_once("../common/api_include.php");
 
 $user_id = $_SESSION['user_id'];
 $id = $_POST['id'];
+$action = $_POST['action'];
 
 switch ($action) {
     case 'change_image':

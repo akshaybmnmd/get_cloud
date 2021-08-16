@@ -15,13 +15,13 @@ switch ($_POST['action']) {
     case 'from_bin':
         if (file_exists($path)) {
             $r = '1';
-            if (copy("$path", "/var/www/html/mydisk/$user_id/image/$filename")) {
+            if (copy("$path", "/var/www/html/mydisk/$user_id/images/$filename")) {
                 $r = '2';
-                if (file_exists("/var/www/html/mydisk/$user_id/image/$filename")) {
+                if (file_exists("/var/www/html/mydisk/$user_id/images/$filename")) {
                     $r = '3';
                     if (unlink($path)) {
                         $r = '4';
-                        $sql = "UPDATE `images` SET `path` = '../mydisk/$user_id/image/$filename', `location` = 'local_hdd_U_i' WHERE `images`.`id` = $id";
+                        $sql = "UPDATE `images` SET `path` = '../mydisk/$user_id/images/$filename', `location` = 'local_hdd_U_i' WHERE `images`.`id` = $id";
 
                         if ($conn->query($sql) === TRUE) {
                             $r = false;

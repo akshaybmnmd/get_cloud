@@ -198,13 +198,13 @@ $conn->close();
         method: "POST",
         url: "actions/remove_image.php",
         data: {
-          id: id
+          id: img_id
         }
       })
       .done((data) => {
         console.log(data);
         // location.reload();
-        $('#code' + img_id).remove();
+        $('#code' + id).remove();
       });
   }
 

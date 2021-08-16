@@ -84,13 +84,31 @@ $conn->close();
     pages = [];
     id = <?php echo $ratio; ?>;
 
-    var i, j, temporary, chunk = 20;
-    for (i = 0, j = bin_images.length; i < j; i += chunk) {
-        temporary = bin_images.slice(i, i + chunk);
-        if (i >= 70) {
-            pages.push(temporary);
+
+    var values = Object.values(bin_images);
+    var final = [];
+    var counter = 0;
+    var portion = {};
+
+    for (var key in bin_images) {
+        if (counter !== 0 && counter % 20 === 0) {
+            pages.push(portion);
+            portion = {};
         }
+        portion[key] = values[counter];
+        counter++
     }
+    pages.push(portion);
+
+
+
+    // var i, j, temporary, chunk = 20;
+    // for (i = 0, j = bin_images.length; i < j; i += chunk) {
+    //     temporary = bin_images.slice(i, i + chunk);
+    //     if (i >= 70) {
+    //         pages.push(temporary);
+    //     }
+    // }
 
     var modal = document.getElementById("myModal");
 
@@ -164,6 +182,7 @@ $conn->close();
 
                 if (img.length) {
                     img.forEach((val) => {
+                        console.log(val);
                         bin_images.push(val);
                     });
 

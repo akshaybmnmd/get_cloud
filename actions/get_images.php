@@ -16,7 +16,7 @@ $page = $_POST['page'];
 $limit = ($page * 500) + 1;
 $response['user_id'] = $user_id;
 
-$sql = "SELECT * FROM `images` WHERE `user_id` = '$user_id' AND `location` = 'local_hdd_U_i_r' ORDER BY `time` DESC LIMIT $limit,500";
+$sql = "SELECT * FROM `images` WHERE `user_id` = '$user_id' AND `location` = 'local_hdd_U_i' ORDER BY `time` DESC LIMIT $limit,500";
 // $sql = "SELECT * FROM `images` WHERE `user_id` = '$user_id' ORDER BY `time` DESC LIMIT $limit,500";
 $result = $conn->query($sql);
 

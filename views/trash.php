@@ -58,15 +58,15 @@ $conn->close();
 
     <?php
     $count = 0;
-    foreach ($images as $key => $img) {
-        $count++;
-        $output .= "<div class=\"photo\" style=\"text-align: center;\" id=\"code$key\">";
-        $output .= "<img class=\"lazy\" id=\"$key\" src=\"{$img['path']}\" data-original=\"{$img['path']}\" alt=\"{$img['name']}\"><br>\n";
-        $output .= "({$img['mem']} KB)";
-        $output .= "</div>\n";
-        if ($count == 70)
-            break;
-    }
+    // foreach ($images as $key => $img) {
+    //     $count++;
+    //     $output .= "<div class=\"photo\" style=\"text-align: center;\" id=\"code$key\">";
+    //     $output .= "<img class=\"lazy\" id=\"$key\" src=\"{$img['path']}\" data-original=\"{$img['path']}\" alt=\"{$img['name']}\"><br>\n";
+    //     $output .= "({$img['mem']} KB)";
+    //     $output .= "</div>\n";
+    //     if ($count == 70)
+    //         break;
+    // }
 
     if (!empty($output)) {
         print $output;

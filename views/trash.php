@@ -179,11 +179,12 @@ $conn->close();
             .done((data) => {
                 console.log("response", data);
                 img = data.data;
-
+                k = data.limit;
                 if (img.length) {
                     img.forEach((val) => {
                         console.log(val);
-                        bin_images.push(val);
+                        bin_images["k" + k] = val;
+                        k++;
                     });
 
                     var i, j, temporary, chunk = 20;

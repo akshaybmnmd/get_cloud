@@ -82,6 +82,7 @@ $conn->close();
     request = 1;
     pages = [];
     id = <?php echo $count; ?>;
+    initial = true;
 
 
     var values = Object.values(bin_images);
@@ -197,6 +198,10 @@ $conn->close();
                 } else {
                     request = 0;
                 }
+                if (initial) {
+                    loadrest();
+                    initial = false;
+                }
             });
     }
 
@@ -257,5 +262,6 @@ $conn->close();
             left: 0,
             behavior: 'smooth'
         });
+        loadrest();
     });
 </script>

@@ -207,6 +207,7 @@ $conn->close();
   });
 
   $(document).ready(function() {
+    loadrest();
     window.scroll({
       top: 0,
       left: 0,

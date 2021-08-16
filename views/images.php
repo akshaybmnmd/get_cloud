@@ -11,7 +11,7 @@ if ($result->num_rows > 0) {
   $key = 0;
   while ($row = $result->fetch_assoc()) {
     $id = $row["id"];
-    $images[$key] = array(
+    $images["j" . $key] = array(
       'id' => $id,
       'name' => $row['Name'],
       'path' => $row["path"],

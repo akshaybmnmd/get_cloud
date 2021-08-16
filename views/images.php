@@ -190,7 +190,7 @@ $conn->close();
       modalImg.src = t.target.src;
       img_id = images[id].id;
       likes = status == "public" ? "<br>" + images[id].like + " Likes" : "";
-      captionText.innerHTML = t.target.alt + '<br>size  ' + size + status + likes + '<!--<br>Download &nbsp; <i class="fas fa-download" style="cursor: pointer;" onclick="download(' + img_id + ',' + id + ')"></i>--><br>Move to bin &nbsp; <i class="fas fa-trash" style="cursor: pointer;" onclick="trash(' + img_id + ',' + id + ')"></i>';
+      captionText.innerHTML = t.target.alt + '<br>size  ' + size + status + likes + '<!--<br>Download &nbsp; <i class="fas fa-download" style="cursor: pointer;" onclick="download(' + img_id + ',"' + id + '")"></i>--><br>Move to bin &nbsp; <i class="fas fa-trash" style="cursor: pointer;" onclick="trash(' + img_id + ',"' + id + '")"></i>';
     });
   }
 

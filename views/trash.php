@@ -11,7 +11,7 @@ if ($result->num_rows > 0) {
     $key = 0;
     while ($row = $result->fetch_assoc()) {
         $id = $row["id"];
-        $images["j" . $key] = array(
+        $images["k" . $key] = array(
             'id' => $id,
             'name' => $row['Name'],
             'path' => $row["path"],
@@ -77,7 +77,7 @@ $conn->close();
 </div>
 
 <script type="text/javascript" charset="utf-8">
-    var images = <?php echo json_encode($images); ?>;
+    var bin_images = <?php echo json_encode($images); ?>;
     page = -1;
     page_flag = -1;
     request = 1;
@@ -85,8 +85,8 @@ $conn->close();
     id = <?php echo $ratio; ?>;
 
     var i, j, temporary, chunk = 20;
-    for (i = 0, j = images.length; i < j; i += chunk) {
-        temporary = images.slice(i, i + chunk);
+    for (i = 0, j = bin_images.length; i < j; i += chunk) {
+        temporary = bin_images.slice(i, i + chunk);
         if (i >= 70) {
             pages.push(temporary);
         }
@@ -164,7 +164,7 @@ $conn->close();
 
                 if (img.length) {
                     img.forEach((val) => {
-                        images.push(val);
+                        bin_images.push(val);
                     });
 
                     var i, j, temporary, chunk = 20;
@@ -184,10 +184,10 @@ $conn->close();
     function add_img_click() {
         $('img').click((t) => {
             id = t.target.id;
-            size = images[id].mem + " KB ";
+            size = bin_images[id].mem + " KB ";
             modal.style.display = "block";
             modalImg.src = t.target.src;
-            img_id = images[id].id;
+            img_id = bin_images[id].id;
             captionText.innerHTML = t.target.alt + '<br>size  ' + size + '<br>Restore &nbsp; <i class="fas fa-circle" style="cursor: pointer;"></i><br>Remove from bin &nbsp; <i class="fas fa-trash" style="cursor: pointer;" onclick="trash(' + img_id + ',\'' + id + '\')"></i>';
         });
     }

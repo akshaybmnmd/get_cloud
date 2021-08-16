@@ -57,7 +57,7 @@ $conn->close();
     </div>
 
     <?php
-    $count = 0;
+    // $count = 0;
     // foreach ($images as $key => $img) {
     //     $count++;
     //     $output .= "<div class=\"photo\" style=\"text-align: center;\" id=\"code$key\">";
@@ -68,9 +68,9 @@ $conn->close();
     //         break;
     // }
 
-    if (!empty($output)) {
-        print $output;
-    }
+    // if (!empty($output)) {
+    //     print $output;
+    // }
     ?>
 
 </div>
@@ -81,7 +81,8 @@ $conn->close();
     page_flag = -1;
     request = 1;
     pages = [];
-    id = <?php echo $count; ?>;
+    // id = <?php //echo $count; 
+            ?>;
     initial = true;
 
 
@@ -128,8 +129,6 @@ $conn->close();
         });
     }
 
-    add_img_click();
-
     function change_privacy(id) {
         $.post("actions/edit_privacy.php", {
             id: id,
@@ -150,7 +149,7 @@ $conn->close();
 
             if (pages[page]) {
                 pages[page].forEach((val) => {
-                    id++;
+                    id = val.id;
                     $('.container').append('<div class="photo" id="code' + id + '"><img class="lazy" id="' + id + '" src="' + val.path + '" data-original="' + val.path + '" alt="' + val.name + '"><br>(' + val.mem + ' KB) </div>');
                 });
 

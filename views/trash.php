@@ -63,7 +63,6 @@ $conn->close();
     pages = [];
     initial = true;
 
-
     var values = Object.values(bin_images);
     var final = [];
     var counter = 0;

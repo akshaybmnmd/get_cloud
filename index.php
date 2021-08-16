@@ -133,6 +133,12 @@ $conn->close();
                         </a>
                     </li>
 
+                    <li class="trash">
+                        <a href="#">
+                            <i class="fas fa-trash"></i>
+                        </a>
+                    </li>
+
                     <li class="images">
                         <a href="./logout.php">
                             <i class="fas fa-sign-out-alt"></i>

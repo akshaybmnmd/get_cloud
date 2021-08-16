@@ -209,10 +209,10 @@ $conn->close();
     function add_img_click() {
         $('img').click((t) => {
             id = t.target.id;
-            size = bin_images[id].mem + " KB ";
+            size = bin_images["k" + id].mem + " KB ";
             modal.style.display = "block";
             modalImg.src = t.target.src;
-            img_id = bin_images[id].id;
+            img_id = bin_images["k" + id].id;
             captionText.innerHTML = t.target.alt + '<br>size  ' + size + '<br>Restore &nbsp; <i class="fas fa-circle" style="cursor: pointer;"></i><br>Remove from bin &nbsp; <i class="fas fa-trash" style="cursor: pointer;" onclick="trash(' + img_id + ',\'' + id + '\')"></i>';
         });
     }

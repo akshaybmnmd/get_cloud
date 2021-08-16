@@ -159,8 +159,8 @@ $conn->close();
                 page_flag++;
 
                 if (initial) {
-                    loadrest();
                     initial = false;
+                    loadrest();
                 }
             } else {
                 if (request != 0) {

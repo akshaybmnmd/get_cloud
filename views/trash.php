@@ -65,7 +65,7 @@ $conn->close();
         $output .= "({$img['mem']} KB)";
         $output .= "</div>\n";
         $ratio = $key;
-        if ($key == 69)
+        if ($key == "k69")
             break;
     }
 

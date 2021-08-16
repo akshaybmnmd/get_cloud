@@ -66,7 +66,7 @@ $conn->close();
     $output .= "{$img['like']} likes<br>\n";
     $output .= "</div>\n";
     $ratio = $key;
-    if ($key == 69)
+    if ($key == "j69")
       break;
   }
 

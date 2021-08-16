@@ -8,7 +8,6 @@ $sql = "SELECT * FROM `images` WHERE `user_id` = '$user_id' AND `location` = 'lo
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     // output data of each row
-    // $key = 0;
     while ($row = $result->fetch_assoc()) {
         $id = $row["id"];
         $images["k" . $id] = array(
@@ -19,7 +18,6 @@ if ($result->num_rows > 0) {
             'like' => $row["likes"],
             'privacy' => $row['privacy']
         );
-        // $key++;
     }
 } else {
     $images = [];
@@ -55,24 +53,6 @@ $conn->close();
         <img class="modal-content" id="img01">
         <div id="caption"></div>
     </div>
-
-    <?php
-    // $count = 0;
-    // foreach ($images as $key => $img) {
-    //     $count++;
-    //     $output .= "<div class=\"photo\" style=\"text-align: center;\" id=\"code$key\">";
-    //     $output .= "<img class=\"lazy\" id=\"$key\" src=\"{$img['path']}\" data-original=\"{$img['path']}\" alt=\"{$img['name']}\"><br>\n";
-    //     $output .= "({$img['mem']} KB)";
-    //     $output .= "</div>\n";
-    //     if ($count == 70)
-    //         break;
-    // }
-
-    // if (!empty($output)) {
-    //     print $output;
-    // }
-    ?>
-
 </div>
 
 <script type="text/javascript" charset="utf-8">
@@ -81,8 +61,6 @@ $conn->close();
     page_flag = -1;
     request = 1;
     pages = [];
-    // id = <?php //echo $count; 
-            ?>;
     initial = true;
 
 
@@ -100,16 +78,6 @@ $conn->close();
         counter++
     }
     pages.push(portion);
-
-
-
-    // var i, j, temporary, chunk = 20;
-    // for (i = 0, j = bin_images.length; i < j; i += chunk) {
-    //     temporary = bin_images.slice(i, i + chunk);
-    //     if (i >= 70) {
-    //         pages.push(temporary);
-    //     }
-    // }
 
     var modal = document.getElementById("myModal");
 
@@ -229,7 +197,6 @@ $conn->close();
             })
             .done((data) => {
                 console.log(data);
-                // location.reload();
                 $('#code' + id).remove();
             });
     }
@@ -246,7 +213,6 @@ $conn->close();
             })
             .done((data) => {
                 console.log(data);
-                // location.reload();
                 $('#code' + id).remove();
             });
     }

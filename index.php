@@ -31,7 +31,7 @@ $conn->close();
 <head>
     <meta charset="UTF-8">
     <title>!!loota!!</title>
-    <link rel="icon" href="icon.png" type="image/png" sizes="16x16">
+    <link rel="icon" href="icon.png" type="image/png">
     <script>
         var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
         if (isMobile) {

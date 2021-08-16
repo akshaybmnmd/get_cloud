@@ -8,10 +8,9 @@ $sql = "SELECT * FROM `images` WHERE `user_id` = '$user_id' AND `location` = 'lo
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
   // output data of each row
-  $key = 0;
   while ($row = $result->fetch_assoc()) {
     $id = $row["id"];
-    $images["j" . $key] = array(
+    $images["j" . $id] = array(
       'id' => $id,
       'name' => $row['Name'],
       'path' => $row["path"],
@@ -19,7 +18,6 @@ if ($result->num_rows > 0) {
       'like' => $row["likes"],
       'privacy' => $row['privacy']
     );
-    $key++;
   }
 } else {
   $images = [];
@@ -56,25 +54,6 @@ $conn->close();
     <div id="caption"></div>
   </div>
 
-  <?php
-  $ratio = 0.3;
-  $output = "";
-  foreach ($images as $key => $img) {
-    $output .= "<div class=\"photo\" id=\"code$key\">";
-    $output .= "<img class=\"lazy\" id=\"$key\" src=\"{$img['path']}\" data-original=\"{$img['path']}\" alt=\"{$img['name']}\"><br>\n";
-    $output .= "({$img['mem']} KB) <button id='{$img['id']}' onclick='change_privacy({$img['id']})'>Make " . ($img['privacy'] == 'public' ? "private" : "public") . "</button><br>";
-    $output .= "{$img['like']} likes<br>\n";
-    $output .= "</div>\n";
-    $ratio = $key;
-    if ($key == "j69")
-      break;
-  }
-
-  if (!empty($output)) {
-    print $output;
-  }
-  ?>
-
 </div>
 
 <script type="text/javascript" charset="utf-8">
@@ -83,15 +62,22 @@ $conn->close();
   page_flag = -1;
   request = 1;
   pages = [];
-  id = <?php echo $ratio; ?>;
+  initial = true;
 
-  var i, j, temporary, chunk = 20;
-  for (i = 0, j = images.length; i < j; i += chunk) {
-    temporary = images.slice(i, i + chunk);
-    if (i >= 70) {
-      pages.push(temporary);
+  var values = Object.values(images);
+  var final = [];
+  var counter = 0;
+  var portion = [];
+
+  for (var key in images) {
+    if (counter !== 0 && counter % 20 === 0) {
+      pages.push(portion);
+      portion = [];
     }
+    portion.push(values[counter]);
+    counter++
   }
+  pages.push(portion);
 
   var modal = document.getElementById("myModal");
 
@@ -110,8 +96,6 @@ $conn->close();
       $("img.lazy").lazyload();
     });
   }
-
-  add_img_click();
 
   function change_privacy(id) {
     $.post("actions/edit_privacy.php", {
@@ -133,19 +117,23 @@ $conn->close();
 
       if (pages[page]) {
         pages[page].forEach((val) => {
-          id++;
+          id = val.id;
           $('.container').append('<div class="photo" id="code' + id + '"><img class="lazy" id="' + id + '" src="' + val.path + '" data-original="' + val.path + '" alt="' + val.name + '"><br>(' + val.mem + ' KB) <button id="' + val.id + '" onclick="change_privacy(' + val.id + ')">Make ' + val.privacy + '</button><br>' + val.like + ' likes<br></div>');
         });
 
         add_img_click();
 
         page_flag++;
+
+        if (initial) {
+          initial = false;
+          loadrest();
+        }
       } else {
         if (request != 0) {
           loadnextpage();
         }
       }
-
     }
     $('.container').append("");
   }
@@ -185,12 +173,12 @@ $conn->close();
   function add_img_click() {
     $('img').click((t) => {
       id = t.target.id;
-      size = images[id].mem + " KB ";
-      status = images[id].privacy;
+      size = images["j" + id].mem + " KB ";
+      status = images["j" + id].privacy;
       modal.style.display = "block";
       modalImg.src = t.target.src;
-      img_id = images[id].id;
-      likes = status == "public" ? "<br>" + images[id].like + " Likes" : "";
+      img_id = images["j" + id].id;
+      likes = status == "public" ? "<br>" + images["k" + id].like + " Likes" : "";
       captionText.innerHTML = t.target.alt + '<br>size  ' + size + status + likes + '<br>Download &nbsp; <a href="' + t.target.src + '" download><i class="fas fa-download" style="cursor: pointer;"></i></a><br>Move to bin &nbsp; <i class="fas fa-trash" style="cursor: pointer;" onclick="trash(' + img_id + ',\'' + id + '\')"></i>';
     });
   }

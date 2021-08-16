@@ -177,7 +177,7 @@ $conn->close();
                 }
             })
             .done((data) => {
-                console.log("Data Saved", data);
+                console.log("response", data);
                 img = data.data;
 
                 if (img.length) {

@@ -28,6 +28,7 @@ if (@$_POST['token'] == "sdlhg3567$#^fhgE%yuY?34") {
 $page = $_POST['page'];
 $limit = ($page * 500) + 1;
 $response['user_id'] = $user_id;
+$response['limit'] = $limit;
 
 switch ($_POST['action']) {
     case 'images':

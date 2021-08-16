@@ -157,6 +157,11 @@ $conn->close();
                 add_img_click();
 
                 page_flag++;
+
+                if (initial) {
+                    loadrest();
+                    initial = false;
+                }
             } else {
                 if (request != 0) {
                     loadnextpage();
@@ -198,10 +203,7 @@ $conn->close();
                 } else {
                     request = 0;
                 }
-                if (initial) {
-                    loadrest();
-                    initial = false;
-                }
+
             });
     }
 

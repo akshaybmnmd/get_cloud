@@ -47,7 +47,6 @@ $conn->close();
 
 <div class="container">
 
-    <!-- The Modal -->
     <div id="myModal" class="modal">
         <span class="close">&times;</span>
         <img class="modal-content" id="img01">
@@ -62,11 +61,10 @@ $conn->close();
     request = 1;
     pages = [];
     initial = true;
-
-    var values = Object.values(bin_images);
-    var final = [];
-    var counter = 0;
-    var portion = [];
+    values = Object.values(bin_images);
+    final = [];
+    counter = 0;
+    portion = [];
 
     for (var key in bin_images) {
         if (counter !== 0 && counter % 20 === 0) {
@@ -79,15 +77,10 @@ $conn->close();
     pages.push(portion);
 
     var modal = document.getElementById("myModal");
-
-    // Get the image and insert it inside the modal - use its "alt" text as a caption
     var modalImg = document.getElementById("img01");
     var captionText = document.getElementById("caption");
-
-    // Get the <span> element that closes the modal
     var span = document.getElementsByClassName("close")[0];
 
-    // When the user clicks on <span> (x), close the modal
     span.onclick = function() {
         modal.style.display = "none";
 
@@ -133,7 +126,6 @@ $conn->close();
                     loadnextpage();
                 }
             }
-
         }
         $('.container').append("");
     }
@@ -169,7 +161,6 @@ $conn->close();
                 } else {
                     request = 0;
                 }
-
             });
     }
 
@@ -180,7 +171,7 @@ $conn->close();
             modal.style.display = "block";
             modalImg.src = t.target.src;
             img_id = bin_images["k" + id].id;
-            captionText.innerHTML = t.target.alt + '<br>size  ' + size + '<br>Restore &nbsp; <i class="fas fa-circle" style="cursor: pointer;"></i><br>Remove from bin &nbsp; <i class="fas fa-trash" style="cursor: pointer;" onclick="trash(' + img_id + ',\'' + id + '\')"></i>';
+            captionText.innerHTML = t.target.alt + '<br>size  ' + size + '<br>Restore &nbsp; <i class="fas fa-circle" style="cursor: pointer;" onclick="restore(' + img_id + ',\'' + id + '\')"></i><br>Remove from bin &nbsp; <i class="fas fa-trash" style="cursor: pointer;" onclick="trash(' + img_id + ',\'' + id + '\')"></i>';
         });
     }
 
@@ -204,7 +195,7 @@ $conn->close();
         console.log("trashed..", id, img_id);
         $.ajax({
                 method: "POST",
-                url: "actions/remove_image.php",
+                url: "actions/restore_image.php",
                 data: {
                     id: img_id,
                     action: "from_bin"

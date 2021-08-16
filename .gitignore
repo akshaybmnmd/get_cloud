@@ -1,2 +1,3 @@
 nbproject
-common/
+common/db.php
+common/config.php

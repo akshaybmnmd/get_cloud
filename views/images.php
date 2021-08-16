@@ -155,7 +155,8 @@ $conn->close();
         method: "POST",
         url: "actions/get_images.php",
         data: {
-          page: request
+          page: request,
+          action: "images"
         }
       })
       .done((data) => {
@@ -200,7 +201,8 @@ $conn->close();
         method: "POST",
         url: "actions/remove_image.php",
         data: {
-          id: img_id
+          id: img_id,
+          action: "to_bin"
         }
       })
       .done((data) => {

@@ -154,7 +154,8 @@ $conn->close();
                 method: "POST",
                 url: "actions/get_images.php",
                 data: {
-                    page: request
+                    page: request,
+                    action: "images_bin"
                 }
             })
             .done((data) => {

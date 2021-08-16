@@ -8,9 +8,10 @@ $sql = "SELECT * FROM `images` WHERE `user_id` = '$user_id' AND `location` = 'lo
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
   // output data of each row
+  $key = 0;
   while ($row = $result->fetch_assoc()) {
     $id = $row["id"];
-    $images[] = array(
+    $images[$key] = array(
       'id' => $id,
       'name' => $row['Name'],
       'path' => $row["path"],
@@ -18,6 +19,7 @@ if ($result->num_rows > 0) {
       'like' => $row["likes"],
       'privacy' => $row['privacy']
     );
+    $key++;
   }
 } else {
   $images = [];

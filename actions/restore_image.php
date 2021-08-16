@@ -88,5 +88,6 @@ switch ($_POST['action']) {
 //     $response['update'] = $result;
 // }
 
+$response['error_code'] = $r;
 $conn->close();
 exit(json_encode($response));

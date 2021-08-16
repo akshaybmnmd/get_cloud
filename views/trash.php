@@ -88,14 +88,14 @@ $conn->close();
     var values = Object.values(bin_images);
     var final = [];
     var counter = 0;
-    var portion = {};
+    var portion = [];
 
     for (var key in bin_images) {
         if (counter !== 0 && counter % 20 === 0) {
             pages.push(portion);
-            portion = {};
+            portion = [];
         }
-        portion[key] = values[counter];
+        portion.push(values[counter]);
         counter++
     }
     pages.push(portion);

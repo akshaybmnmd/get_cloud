@@ -22,3 +22,4 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 
 require "../common/db.php";
 $response['DB'] = "ok";
+sdhjkfgkjhsdgfkj
